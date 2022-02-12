@@ -24,10 +24,6 @@ molecule:
       # tag: "34"
       - image: "opensuse"
         tag: "latest"
-      - image: "enterpriselinux"
-        tag: "latest"
-      - image: "docker-ubuntu-systemd"
-        tag: "bionic"
 
 # testing:
 #   script:
