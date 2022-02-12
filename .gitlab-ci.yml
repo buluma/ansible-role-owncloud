@@ -26,10 +26,8 @@ molecule:
         tag: "latest"
       - image: "enterpriselinux"
         tag: "latest"
-      - image: "alpine-openrc"
-        tag: "latest"
-      - image: "alpine-openrc"
-        tag: "edge"
+      - image: "docker-ubuntu-systemd"
+        tag: "bionic"
 
 # testing:
 #   script:
