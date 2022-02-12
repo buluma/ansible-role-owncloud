@@ -11,7 +11,7 @@ _owncloud_requirements:
     - php7-ldap
     - php7-mbstring
     - php7-mysqlnd
-    - php7-pecl-apcu
+    - php-pecl-apcu
     - php7-pecl-redis
     - php7-process
     - php7-xml
@@ -58,12 +58,12 @@ _owncloud_requirements:
     - php-7-ldap
     - php-7-mbstring
     - php-7-mysqlnd
-    - php-7-pecl-apcu
+    - php-pecl-apcu
     - php-7-process
     - php-7-xml
     - php-7-zip
   Suse:
-    - php-7-posix
+    - php-posix
     - php7-ctype
     - php7-curl
     - php7-dom
