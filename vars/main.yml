@@ -39,16 +39,16 @@ _owncloud_requirements:
     - php7-zip
   Debian:
     - php-apcu
-    - php-7-common
-    - php-7-curl
-    - php-7-fpm
-    - php-7-gd
-    - php-7-intl
-    - php-7-ldap
-    - php-7-mbstring
-    - php-7-mysql
-    - php-7-xml
-    - php-7-zip
+    - php-common
+    - php-curl
+    - php-fpm
+    - php-gd
+    - php-intl
+    - php-ldap
+    - php-mbstring
+    - php-mysql
+    - php-xml
+    - php-zip
   RedHat:
     - php-7-curl
     - php-7-fpm
