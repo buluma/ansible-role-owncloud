@@ -1,0 +1,36 @@
+---
+- name: Prepare
+  hosts: all
+  become: yes
+  gather_facts: no
+
+  roles:
+    - role: buluma.bootstrap
+    - role: buluma.core_dependencies
+    - role: buluma.cron
+    - role: buluma.buildtools
+    - role: buluma.epel
+    - role: buluma.python_pip
+    - role: buluma.openssl
+      openssl_items:
+        - name: apache-httpd
+          common_name: "{{ ansible_fqdn }}"
+    - role: buluma.selinux
+    - role: buluma.httpd
+    - role: buluma.redis
+    - role: buluma.remi
+      remi_enabled_repositories:
+        - php73
+      when:
+        - ansible_distribution != "Fedora"
+    - role: buluma.php
+    - role: buluma.php_fpm
+    - role: buluma.mysql
+      mysql_databases:
+        - name: owncloud
+          encoding: utf8
+          collation: utf8_bin
+      mysql_users:
+        - name: owncloud
+          password: 0wnCl0uD
+          priv: "owncloud.*:ALL"
