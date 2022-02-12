@@ -20,6 +20,8 @@ molecule:
         tag: "latest"
       - image: "docker-ubuntu-systemd"
         tag: "bionic"
+      - image: "fedora-systemd"
+        tag: "34"
 
 # testing:
 #   script:
