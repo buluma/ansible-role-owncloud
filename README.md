@@ -4,7 +4,7 @@ Install and configure owncloud on your system.
 
 |GitHub|GitLab|Quality|Downloads|Version|
 |------|------|-------|---------|-------|
-|[![github](https://github.com/buluma/ansible-role-owncloud/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-owncloud/actions)|[![gitlab](https://gitlab.com/buluma/ansible-role-owncloud/badges/main/pipeline.svg)](https://gitlab.com/buluma/ansible-role-owncloud)|[![quality](https://img.shields.io/ansible/quality/)](https://galaxy.ansible.com/buluma/owncloud)|[![downloads](https://img.shields.io/ansible/role/d/)](https://galaxy.ansible.com/buluma/owncloud)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-owncloud.svg)](https://github.com/buluma/ansible-role-owncloud/releases/)|
+|[![github](https://github.com/buluma/ansible-role-owncloud/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-owncloud/actions)|[![gitlab](https://gitlab.com/buluma/ansible-role-owncloud/badges/main/pipeline.svg)](https://gitlab.com/buluma/ansible-role-owncloud)|[![quality](https://img.shields.io/ansible/quality/58028)](https://galaxy.ansible.com/buluma/owncloud)|[![downloads](https://img.shields.io/ansible/role/d/58028)](https://galaxy.ansible.com/buluma/owncloud)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-owncloud.svg)](https://github.com/buluma/ansible-role-owncloud/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
