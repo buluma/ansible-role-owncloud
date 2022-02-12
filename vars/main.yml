@@ -38,7 +38,7 @@ _owncloud_requirements:
     - php7-xml
     - php7-zip
   Debian:
-    - php-7-apcu
+    - php-apcu
     - php-7-common
     - php-7-curl
     - php-7-fpm
