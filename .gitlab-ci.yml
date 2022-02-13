@@ -34,7 +34,7 @@ testing:
   parallel:
     matrix:
       - image: "docker-ubuntu-systemd"
-        tag: "latest"
+        tag: "bionic"
       - image: "fedora-systemd"
         tag: "34"
       - image: "opensuse"
