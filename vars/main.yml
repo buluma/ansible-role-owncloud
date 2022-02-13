@@ -11,7 +11,7 @@ _owncloud_requirements:
     - php7-ldap
     - php7-mbstring
     - php7-mysqlnd
-    - php-pecl-apcu
+    - php7-pecl-apcu
     - php7-pecl-redis
     - php7-process
     - php7-xml
@@ -50,18 +50,18 @@ _owncloud_requirements:
     - php-xml
     - php-zip
   RedHat:
-    - php-7-curl
-    - php-7-fpm
-    - php-7-gd
-    - php-7-intl
-    - php-7-json
-    - php-7-ldap
-    - php-7-mbstring
-    - php-7-mysqlnd
-    - php-pecl-apcu
-    - php-7-process
-    - php-7-xml
-    - php-7-zip
+    - php7-curl
+    - php7-fpm
+    - php7-gd
+    - php7-intl
+    - php7-json
+    - php7-ldap
+    - php7-mbstring
+    - php7-mysqlnd
+    - php7-pecl-apcu
+    - php7-process
+    - php7-xml
+    - php7-zip
   Suse:
     - php-posix
     - php7-ctype
