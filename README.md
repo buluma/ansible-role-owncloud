@@ -70,7 +70,7 @@ The default values for the variables are set in `defaults/main.yml`:
 # defaults file for owncloud
 
 # The version of owncloud to install.
-owncloud_version: "10.8.0"
+owncloud_version: "10.9.1"
 
 # The domain under which this server will be available. For example:
 # "localhost" or "owncloud.example.com". Does not include protocol identifier,
@@ -127,9 +127,9 @@ This role has been tested on these [container images](https://hub.docker.com/u/b
 |---------|----|
 |el|8|
 |debian|bullseye|
-|fedora|all|
+|fedora|32, 33, 34|
 |opensuse|all|
-|ubuntu|bionic|
+|ubuntu|focal|
 
 The minimum version of Ansible required is 2.10, tests have been done to:
 

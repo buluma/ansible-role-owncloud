@@ -21,8 +21,8 @@
     - role: buluma.remi
       remi_enabled_repositories:
         - php73
-        # when:
-        #   - ansible_distribution != "Fedora"
+      when:
+        - ansible_distribution != "Fedora"
     - role: buluma.php
     - role: buluma.php_fpm
     - role: buluma.mysql
