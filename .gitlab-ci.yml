@@ -45,8 +45,6 @@ testing:
         tag: "8"
       - image: "amazonlinux"
         tag: "2"
-      # - image: "debian-systemd"
-      #   tag: "latest"
 
 # role_testing:
 #   script:
