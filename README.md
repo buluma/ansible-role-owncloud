@@ -145,7 +145,6 @@ Some roles can't run on a specific distribution or version. Here are some except
 |---------------------------|------------------------|
 | centos:latest | No package php73 available. |
 | opensuse | This version of ownCloud is not compatible with PHP 7.4 |
-| fedora:32 | nothing provides libzip(x86-64) >= 1.7.3 needed by php-pecl-zip-1.19.1-1.fc32.remi.7.4.x86_64 |
 
 
 If you find issues, please register them in [GitHub](https://github.com/buluma/ansible-role-owncloud/issues)
