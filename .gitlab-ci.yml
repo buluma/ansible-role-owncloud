@@ -37,14 +37,10 @@ testing:
       #   tag: "latest"
       - image: "fedora-systemd"
         tag: "34"
+      - image: "fedora-systemd"
+        tag: "latest"
       - image: "opensuse"
         tag: "latest"
-      - image: "archlinux"
-        tag: "latest"
-      - image: "oraclelinux"
-        tag: "8"
-      - image: "amazonlinux"
-        tag: "2"
 
 # role_testing:
 #   script:
