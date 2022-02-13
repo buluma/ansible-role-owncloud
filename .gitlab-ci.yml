@@ -35,12 +35,18 @@ testing:
     matrix:
       - image: "docker-ubuntu-systemd"
         tag: "focal"
-      - image: "fedora-systemd"
-        tag: "34"
       - image: "opensuse"
         tag: "latest"
       - image: "debian-systemd"
         tag: "bullseye"
+      - image: "fedora-systemd"
+        tag: "34"
+      - image: "fedora-systemd"
+        tag: "rawhide"
+      - image: "fedora-systemd"
+        tag: "33"
+      - image: "fedora-systemd"
+        tag: "32"
 
 # role_testing:
 #   script:
