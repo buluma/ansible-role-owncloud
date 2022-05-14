@@ -16,8 +16,6 @@ molecule:
   retry: 1
   parallel:
     matrix:
-      - image: "enterpriselinux"
-        tag: "7"
       - image: "debian-systemd"
         tag: "latest"
       - image: "fedora-systemd"
@@ -37,8 +35,6 @@ testing:
   retry: 1
   parallel:
     matrix:
-      - image: "enterpriselinux"
-        tag: "7"
       - image: "debian-systemd"
         tag: "latest"
       - image: "fedora-systemd"
