@@ -31,7 +31,7 @@
     creates: "{{ owncloud_destination }}/owncloud"
     mode: "0755"
   notify:
-    - remove config.php
+    - Remove config.php
 
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
@@ -48,7 +48,7 @@
     creates: "{{ owncloud_destination }}/owncloud/config/config.php"
     chdir: "{{ owncloud_destination }}/owncloud"
   notify:
-    - set owncloud trusted domains
+    - Set owncloud trusted domains
   no_log: no
   become: yes
   become_user: "{{ owncloud_httpd_owner }}"
