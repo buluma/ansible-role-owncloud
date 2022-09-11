@@ -16,6 +16,7 @@ _owncloud_requirements:
     - php7-process
     - php7-xml
     - php7-zip
+    - zip
   Alpine:
     - php7-apcu
     - php7-ctype
@@ -37,6 +38,7 @@ _owncloud_requirements:
     - php7-xmlwriter
     - php7-xml
     - php7-zip
+    - zip
   Debian:
     - php-apcu
     - php-common
@@ -49,6 +51,7 @@ _owncloud_requirements:
     - php-mysql
     - php-xml
     - php-zip
+    - zip
   RedHat:  # Fedora 34
     - php-curl
     - php-fpm
@@ -62,6 +65,7 @@ _owncloud_requirements:
     - php-process
     - php-xml
     - php-zip
+    - zip
   Suse:
     - php-posix
     - php7-ctype
@@ -80,6 +84,7 @@ _owncloud_requirements:
     - php7-xmlwriter
     - php7-zip
     - php7-zlib
+    - zip
 
 owncloud_requirements: "{{ _owncloud_requirements[ansible_os_family] | default(_owncloud_requirements['default'] ) }}"
 
