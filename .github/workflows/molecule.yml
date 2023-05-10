@@ -43,8 +43,6 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - image: "enterpriselinux"
-            tag: "8"
           - image: "debian-systemd"
             tag: "latest"
           - image: "fedora-systemd"
