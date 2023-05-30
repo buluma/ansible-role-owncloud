@@ -16,7 +16,12 @@ galaxy_info:
         - all
     - name: Ubuntu
       versions:
+        - lunar
+        - jammy
         - focal
+    - name: Kali
+      versions:
+        - all
 
   galaxy_tags:
     - owncloud
