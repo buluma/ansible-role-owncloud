@@ -16,10 +16,7 @@ galaxy_info:
         - all
     - name: Ubuntu
       versions:
-        - all
-    - name: Kali
-      versions:
-        - all
+        - focal
 
   galaxy_tags:
     - owncloud
