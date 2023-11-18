@@ -1,5 +1,14 @@
 # Changelog
 
+## [Unreleased](https://github.com/buluma/ansible-role-owncloud/tree/HEAD)
+
+[Full Changelog](https://github.com/buluma/ansible-role-owncloud/compare/v1.0.8...HEAD)
+
+**Closed issues:**
+
+- Update buluma/todo-to-issue-action@v1.0.1 @buluma [\#13](https://github.com/buluma/ansible-role-owncloud/issues/13)
+- Update action [\#12](https://github.com/buluma/ansible-role-owncloud/issues/12)
+
 ## [v1.0.8](https://github.com/buluma/ansible-role-owncloud/tree/v1.0.8) (2022-09-11)
 
 [Full Changelog](https://github.com/buluma/ansible-role-owncloud/compare/v1.0.7...v1.0.8)
