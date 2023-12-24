@@ -1,10 +1,10 @@
-# [Ansible role owncloud](#owncloud)
+# Ansible role [owncloud](https://galaxy.ansible.com/ui/standalone/roles/buluma/owncloud/documentation)
 
 Install and configure owncloud on your system.
 
-|GitHub|Version|Issues|Pull Requests|
-|------|-------|------|-------------|
-|[![github](https://github.com/buluma/ansible-role-owncloud/actions/workflows/molecule.yml/badge.svg)](https://github.com/buluma/ansible-role-owncloud/actions/workflows/molecule.yml)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-owncloud.svg)](https://github.com/buluma/ansible-role-owncloud/releases/)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-owncloud.svg)](https://github.com/buluma/ansible-role-owncloud/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-owncloud.svg)](https://github.com/buluma/ansible-role-owncloud/pulls/)|
+|GitHub|Version|Issues|Pull Requests|Downloads|
+|------|-------|------|-------------|---------|
+|[![github](https://github.com/buluma/ansible-role-owncloud/actions/workflows/molecule.yml/badge.svg)](https://github.com/buluma/ansible-role-owncloud/actions/workflows/molecule.yml)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-owncloud.svg)](https://github.com/buluma/ansible-role-owncloud/releases/)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-owncloud.svg)](https://github.com/buluma/ansible-role-owncloud/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-owncloud.svg)](https://github.com/buluma/ansible-role-owncloud/pulls/)|[![Ansible Role](https://img.shields.io/ansible/role/d/buluma/owncloud)](https://galaxy.ansible.com/ui/standalone/roles/buluma/owncloud/documentation)|
 
 ## [Example Playbook](#example-playbook)
 
@@ -146,13 +146,11 @@ If you find issues, please register them in [GitHub](https://github.com/buluma/a
 
 ## [License](#license)
 
-[Apache-2.0](https://github.com/buluma/ansible-role-owncloud/blob/master/LICENSE).
+[Apache-2.0](https://github.com/buluma/ansible-role-owncloud/blob/master/LICENSE)
 
 ## [Author Information](#author-information)
 
-[buluma](https://buluma.github.io/)
+[Shadow Walker](https://buluma.github.io/)
 
-
-### [Special Thanks](#special-thanks)
 
 Template inspired by [Robert de Bock](https://github.com/robertdebock)
