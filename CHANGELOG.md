@@ -7,6 +7,8 @@
 **Closed issues:**
 
 - Update buluma/todo-to-issue-action@v1.0.1 @buluma [\#16](https://github.com/buluma/ansible-role-owncloud/issues/16)
+- Update action [\#15](https://github.com/buluma/ansible-role-owncloud/issues/15)
+- rebuild action [\#14](https://github.com/buluma/ansible-role-owncloud/issues/14)
 - Update buluma/todo-to-issue-action@v1.0.1 @buluma [\#13](https://github.com/buluma/ansible-role-owncloud/issues/13)
 - Update action [\#12](https://github.com/buluma/ansible-role-owncloud/issues/12)
 
