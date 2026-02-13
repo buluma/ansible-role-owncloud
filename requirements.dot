@@ -1,0 +1,35 @@
+digraph PhiloDilemma {
+  label = "Michael Buluma" ;
+  overlap=false
+  {
+    "owncloud" [fillcolor=yellow style=filled penwidth=3]
+    "buluma.bootstrap" [fillcolor=green style=filled]
+    "buluma.buildtools" [fillcolor=green style=filled]
+    "buluma.core_dependencies" [fillcolor=green style=filled]
+    "buluma.cron" [fillcolor=green style=filled]
+    "buluma.epel" [fillcolor=green style=filled]
+    "buluma.httpd" [fillcolor=green style=filled]
+    "buluma.mysql" [fillcolor=green style=filled]
+    "buluma.openssl" [fillcolor=green style=filled]
+    "buluma.php" [fillcolor=green style=filled]
+    "buluma.php_fpm" [fillcolor=green style=filled]
+    "buluma.python_pip" [fillcolor=green style=filled]
+    "buluma.redis" [fillcolor=green style=filled]
+    "buluma.remi" [fillcolor=green style=filled]
+    "buluma.selinux" [fillcolor=green style=filled]
+  }
+  "owncloud" -> "buluma.bootstrap"
+  "owncloud" -> "buluma.buildtools"
+  "owncloud" -> "buluma.core_dependencies"
+  "owncloud" -> "buluma.cron"
+  "owncloud" -> "buluma.epel"
+  "owncloud" -> "buluma.httpd"
+  "owncloud" -> "buluma.mysql"
+  "owncloud" -> "buluma.openssl"
+  "owncloud" -> "buluma.php"
+  "owncloud" -> "buluma.php_fpm"
+  "owncloud" -> "buluma.python_pip"
+  "owncloud" -> "buluma.redis"
+  "owncloud" -> "buluma.remi"
+  "owncloud" -> "buluma.selinux"
+}
