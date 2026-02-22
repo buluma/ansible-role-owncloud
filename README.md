@@ -11,55 +11,51 @@ Install and configure owncloud on your system.
 This example is taken from [`molecule/default/converge.yml`](https://github.com/buluma/ansible-role-owncloud/blob/master/molecule/default/converge.yml) and is tested on each push, pull request and release.
 
 ```yaml
----
-- name: Converge
+- become: true
+  gather_facts: true
   hosts: all
-  become: yes
-  gather_facts: yes
-
+  name: Converge
   roles:
-    - role: buluma.owncloud
+  - role: buluma.owncloud
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/buluma/ansible-role-owncloud/blob/master/molecule/default/prepare.yml):
 
 ```yaml
----
-- name: Prepare
+- become: true
+  gather_facts: false
   hosts: all
-  become: yes
-  gather_facts: no
-
+  name: Prepare
   roles:
-    - role: buluma.bootstrap
-    - role: buluma.core_dependencies
-    - role: buluma.cron
-    - role: buluma.buildtools
-    - role: buluma.epel
-    - role: buluma.python_pip
-    - role: buluma.openssl
-      openssl_items:
-        - name: apache-httpd
-          common_name: "{{ ansible_fqdn }}"
-    - role: buluma.selinux
-    - role: buluma.httpd
-    - role: buluma.redis
-    - role: buluma.remi
-      remi_enabled_repositories:
-        - php73
-      when:
-        - ansible_distribution != "Fedora"
-    - role: buluma.php
-    - role: buluma.php_fpm
-    - role: buluma.mysql
-      mysql_databases:
-        - name: owncloud
-          encoding: utf8
-          collation: utf8_bin
-      mysql_users:
-        - name: owncloud
-          password: 0wnCl0uD
-          priv: "owncloud.*:ALL"
+  - role: buluma.bootstrap
+  - role: buluma.core_dependencies
+  - role: buluma.cron
+  - role: buluma.buildtools
+  - role: buluma.epel
+  - role: buluma.python_pip
+  - openssl_items:
+    - common_name: '{{ ansible_fqdn }}'
+      name: apache-httpd
+    role: buluma.openssl
+  - role: buluma.selinux
+  - role: buluma.httpd
+  - role: buluma.redis
+  - remi_enabled_repositories:
+    - php73
+    role: buluma.remi
+    when:
+    - ansible_distribution != "Fedora"
+  - role: buluma.php
+  - role: buluma.php_fpm
+  - mysql_databases:
+    - collation: utf8_bin
+      encoding: utf8
+      name: owncloud
+    mysql_users:
+    - name: owncloud
+      password: 0wnCl0uD
+      priv: owncloud.*:ALL
+    role: buluma.mysql
 ```
 
 Also see a [full explanation and example](https://buluma.github.io/how-to-use-these-roles.html) on how to use these roles.
@@ -69,24 +65,15 @@ Also see a [full explanation and example](https://buluma.github.io/how-to-use-th
 The default values for the variables are set in [`defaults/main.yml`](https://github.com/buluma/ansible-role-owncloud/blob/master/defaults/main.yml):
 
 ```yaml
----
-# defaults file for owncloud
-
-# The version of owncloud to install.
-owncloud_version: "10.11.0"
-
-# The domain under which this server will be available. For example:
-# "localhost" or "owncloud.example.com". Does not include protocol identifier,
-# (https://) or directories. (/owncloud)
-owncloud_domain_url: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) }}"
-
-# Database connection details.
-owncloud_database_name: owncloud
-owncloud_database_user: owncloud
-owncloud_database_pass: 0wnCl0uD
-owncloud_database_host: "127.0.0.1"
-owncloud_admin_user: admin
 owncloud_admin_pass: OwnCl0uD
+owncloud_admin_user: admin
+owncloud_database_host: 127.0.0.1
+owncloud_database_name: owncloud
+owncloud_database_pass: 0wnCl0uD
+owncloud_database_user: owncloud
+owncloud_domain_url: '{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0])
+  }}'
+owncloud_version: 10.11.0
 ```
 
 ## [Requirements](#requirements)

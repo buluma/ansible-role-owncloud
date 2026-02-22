@@ -1,21 +1,28 @@
 ---
-# vars file for owncloud
-
+_owncloud_config_directory:
+  Alpine: /etc/apache2/conf.d
+  Debian: /etc/apache2/conf-enabled
+  Suse: /etc/apache2/conf.d
+  default: /etc/httpd/conf.d
+_owncloud_destination:
+  Alpine: /var/www
+  default: /var/www/html
+  openSUSE Leap: /srv/www/htdocs
+_owncloud_httpd_group:
+  Debian: www-data
+  Suse: www
+  default: apache
+_owncloud_httpd_owner:
+  Debian: www-data
+  Suse: wwwrun
+  default: apache
+_owncloud_httpd_service:
+  Alpine: apache2
+  Debian: apache2
+  RedHat: httpd
+  Suse: apache2
+  default: httpd
 _owncloud_requirements:
-  default:
-    - php-curl
-    - php-fpm
-    - php-gd
-    - php-intl
-    - php-json
-    - php-ldap
-    - php-mbstring
-    - php-mysqlnd
-    - php-pecl-apcu
-    - php-pecl-redis
-    - php-process
-    - php-xml
-    - php-zip
   Alpine:
     - php7-apcu
     - php7-ctype
@@ -80,67 +87,44 @@ _owncloud_requirements:
     - php7-xmlwriter
     - php7-zip
     - php7-zlib
-
+  default:
+    - php-curl
+    - php-fpm
+    - php-gd
+    - php-intl
+    - php-json
+    - php-ldap
+    - php-mbstring
+    - php-mysqlnd
+    - php-pecl-apcu
+    - php-pecl-redis
+    - php-process
+    - php-xml
+    - php-zip
+owncloud_archive: https://download.owncloud.com/server/owncloud-{{ owncloud_version }}.zip
+owncloud_command: php occ maintenance:install --database "mysql" --database-name "{{ owncloud_database_name }}" --database-user "{{ owncloud_database_user }}"
+  --database-pass "{{ owncloud_database_pass }}" --database-host "{{ owncloud_database_host }}" --admin-user "{{ owncloud_admin_user }}" --admin-pass "{{
+  owncloud_admin_pass }}"
+owncloud_config_directory: "{{ _owncloud_config_directory[ansible_os_family] | default(_owncloud_config_directory['default']) }}"
+owncloud_destination: "{{ _owncloud_destination[ansible_distribution] | default(_owncloud_destination['default']) }}"
+owncloud_httpd_group: "{{ _owncloud_httpd_group[ansible_os_family] | default(_owncloud_httpd_group['default']) }}"
+owncloud_httpd_owner: "{{ _owncloud_httpd_owner[ansible_os_family] | default(_owncloud_httpd_owner['default']) }}"
+owncloud_httpd_service: "{{ _owncloud_httpd_service[ansible_os_family] | default(_owncloud_httpd_service['default']) }}"
+owncloud_permissions:
+  - group: root
+    mode: "0644"
+    name: "{{ owncloud_destination }}/owncloud/.htaccess"
+    owner: root
+  - group: "{{ owncloud_httpd_group }}"
+    mode: "0770"
+    name: "{{ owncloud_destination }}/owncloud/data"
+  - group: "{{ owncloud_httpd_group }}"
+    mode: "0664"
+    name: "{{ owncloud_destination }}/owncloud/config/config.php"
+  - group: "{{ owncloud_httpd_group }}"
+    mode: "0770"
+    name: "{{ owncloud_destination }}/owncloud/config"
 owncloud_requirements: "{{ _owncloud_requirements[ansible_os_family] | default(_owncloud_requirements['default']) }}"
-
 owncloud_sebooleans:
   - httpd_tmp_exec
   - httpd_unified
-
-owncloud_archive: "https://download.owncloud.com/server/owncloud-{{ owncloud_version }}.zip"
-
-_owncloud_destination:
-  default: /var/www/html
-  Alpine: /var/www
-  openSUSE Leap: /srv/www/htdocs
-
-owncloud_destination: "{{ _owncloud_destination[ansible_distribution] | default(_owncloud_destination['default']) }}"
-
-_owncloud_httpd_owner:
-  default: apache
-  Debian: www-data
-  Suse: wwwrun
-
-owncloud_httpd_owner: "{{ _owncloud_httpd_owner[ansible_os_family] | default(_owncloud_httpd_owner['default']) }}"
-
-_owncloud_httpd_group:
-  default: apache
-  Debian: www-data
-  Suse: www
-
-owncloud_httpd_group: "{{ _owncloud_httpd_group[ansible_os_family] | default(_owncloud_httpd_group['default']) }}"
-
-_owncloud_config_directory:
-  default: /etc/httpd/conf.d
-  Alpine: /etc/apache2/conf.d
-  Debian: /etc/apache2/conf-enabled
-  Suse: /etc/apache2/conf.d
-
-owncloud_config_directory: "{{ _owncloud_config_directory[ansible_os_family] | default(_owncloud_config_directory['default']) }}"
-
-owncloud_permissions:
-  - name: "{{ owncloud_destination }}/owncloud/.htaccess"
-    owner: root
-    group: root
-    mode: "0644"
-  - name: "{{ owncloud_destination }}/owncloud/data"
-    mode: "0770"
-    group: "{{ owncloud_httpd_group }}"
-  - name: "{{ owncloud_destination }}/owncloud/config/config.php"
-    mode: "0664"
-    group: "{{ owncloud_httpd_group }}"
-  - name: "{{ owncloud_destination }}/owncloud/config"
-    mode: "0770"
-    group: "{{ owncloud_httpd_group }}"
-
-owncloud_command: 'php occ maintenance:install --database "mysql" --database-name "{{ owncloud_database_name }}" --database-user "{{ owncloud_database_user }}" --database-pass
-  "{{ owncloud_database_pass }}" --database-host "{{ owncloud_database_host }}" --admin-user "{{ owncloud_admin_user }}" --admin-pass "{{ owncloud_admin_pass }}"'
-
-_owncloud_httpd_service:
-  default: httpd
-  Alpine: apache2
-  Debian: apache2
-  Suse: apache2
-  RedHat: httpd
-
-owncloud_httpd_service: "{{ _owncloud_httpd_service[ansible_os_family] | default(_owncloud_httpd_service['default']) }}"

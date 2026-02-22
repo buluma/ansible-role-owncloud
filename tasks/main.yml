@@ -1,64 +1,55 @@
 ---
-# tasks file for owncloud
-
 - name: Import assert.yml
   ansible.builtin.import_tasks: assert.yml
-  run_once: true
   delegate_to: localhost
-
+  run_once: true
 - name: Install requirements
   ansible.builtin.package:
     name: "{{ owncloud_requirements }}"
     state: present
-
 - name: Modify selinux settings
   ansible.posix.seboolean:
     name: "{{ item }}"
-    state: true
     persistent: true
+    state: true
+  loop: "{{ owncloud_sebooleans }}"
   when:
     - ansible_selinux.status is defined
     - ansible_selinux.status == "enabled"
-  loop: "{{ owncloud_sebooleans }}"
-
 - name: Install owncloud
   ansible.builtin.unarchive:
-    src: "{{ owncloud_archive }}"
-    dest: "{{ owncloud_destination }}"
-    remote_src: true
-    owner: "{{ owncloud_httpd_owner }}"
-    group: "{{ owncloud_httpd_group }}"
     creates: "{{ owncloud_destination }}/owncloud"
+    dest: "{{ owncloud_destination }}"
+    group: "{{ owncloud_httpd_group }}"
     mode: "0755"
+    owner: "{{ owncloud_httpd_owner }}"
+    remote_src: true
+    src: "{{ owncloud_archive }}"
   notify:
     - Remove config.php
-
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
-
 - name: Place owncloud.conf
   ansible.builtin.template:
-    src: owncloud.conf.j2
     dest: "{{ owncloud_config_directory }}/owncloud.conf"
     mode: "0644"
-
+    src: owncloud.conf.j2
 - name: Configure owncloud
   ansible.builtin.command:
+    chdir: "{{ owncloud_destination }}/owncloud"
     cmd: "{{ owncloud_command }}"
     creates: "{{ owncloud_destination }}/owncloud/config/config.php"
-    chdir: "{{ owncloud_destination }}/owncloud"
+  become: true
+  become_user: "{{ owncloud_httpd_owner }}"
+  no_log: true
   notify:
     - Set owncloud trusted domains
     - Restart httpd
     - Set permission
-  no_log: true
-  become: true
-  become_user: "{{ owncloud_httpd_owner }}"
-
 - name: Setup crontab
   ansible.builtin.cron:
-    name: owncloud
-    minute: "*/5"
     hour: "*"
-    job: "php {{ owncloud_destination }}/owncloud/occ system:cron"
+    job: php {{ owncloud_destination }}/owncloud/occ system:cron
+    minute: "*/5"
+    name: owncloud
     user: "{{ owncloud_httpd_owner }}"
