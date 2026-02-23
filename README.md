@@ -12,52 +12,52 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 
 ```yaml
 ---
-  - become: true
-    gather_facts: true
-    hosts: all
-    name: Converge
-    roles:
-      - role: buluma.owncloud
+- become: true
+  gather_facts: true
+  hosts: all
+  name: Converge
+  roles:
+  - role: buluma.owncloud
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/buluma/ansible-role-owncloud/blob/master/molecule/default/prepare.yml):
 
 ```yaml
 ---
-  - become: true
-    gather_facts: false
-    hosts: all
-    name: Prepare
-    roles:
-      - role: buluma.bootstrap
-      - role: buluma.core_dependencies
-      - role: buluma.cron
-      - role: buluma.buildtools
-      - role: buluma.epel
-      - role: buluma.python_pip
-      - openssl_items:
-          - common_name: '{{ ansible_fqdn }}'
-            name: apache-httpd
-        role: buluma.openssl
-      - role: buluma.selinux
-      - role: buluma.httpd
-      - role: buluma.redis
-      - remi_enabled_repositories:
-          - php73
-        role: buluma.remi
-        when:
-          - ansible_distribution != "Fedora"
-      - role: buluma.php
-      - role: buluma.php_fpm
-      - mysql_databases:
-          - collation: utf8_bin
-            encoding: utf8
-            name: owncloud
-        mysql_users:
-          - name: owncloud
-            password: 0wnCl0uD
-            priv: owncloud.*:ALL
-        role: buluma.mysql
+- become: true
+  gather_facts: false
+  hosts: all
+  name: Prepare
+  roles:
+  - role: buluma.bootstrap
+  - role: buluma.core_dependencies
+  - role: buluma.cron
+  - role: buluma.buildtools
+  - role: buluma.epel
+  - role: buluma.python_pip
+  - openssl_items:
+    - common_name: '{{ ansible_fqdn }}'
+      name: apache-httpd
+    role: buluma.openssl
+  - role: buluma.selinux
+  - role: buluma.httpd
+  - role: buluma.redis
+  - remi_enabled_repositories:
+    - php73
+    role: buluma.remi
+    when:
+    - ansible_distribution != "Fedora"
+  - role: buluma.php
+  - role: buluma.php_fpm
+  - mysql_databases:
+    - collation: utf8_bin
+      encoding: utf8
+      name: owncloud
+    mysql_users:
+    - name: owncloud
+      password: 0wnCl0uD
+      priv: owncloud.*:ALL
+    role: buluma.mysql
 ```
 
 Also see a [full explanation and example](https://buluma.github.io/how-to-use-these-roles.html) on how to use these roles.
