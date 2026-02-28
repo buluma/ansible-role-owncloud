@@ -74,8 +74,7 @@ owncloud_database_host: 127.0.0.1
 owncloud_database_name: owncloud
 owncloud_database_pass: 0wnCl0uD
 owncloud_database_user: owncloud
-owncloud_domain_url: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0])
-  }}"
+owncloud_domain_url: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) }}"
 owncloud_version: 10.11.0
 ```
 
@@ -136,3 +135,4 @@ If you find issues, please register them on [GitHub](https://github.com/buluma/a
 ## [Author Information](#author-information)
 
 [buluma](https://buluma.github.io/)
+
