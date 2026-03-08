@@ -4,32 +4,32 @@
   hosts: all
   name: Prepare
   roles:
-  - role: buluma.bootstrap
-  - role: buluma.core_dependencies
-  - role: buluma.cron
-  - role: buluma.buildtools
-  - role: buluma.epel
-  - role: buluma.python_pip
-  - openssl_items:
-    - common_name: '{{ ansible_fqdn }}'
-      name: apache-httpd
-    role: buluma.openssl
-  - role: buluma.selinux
-  - role: buluma.httpd
-  - role: buluma.redis
-  - remi_enabled_repositories:
-    - php73
-    role: buluma.remi
-    when:
-    - ansible_distribution != "Fedora"
-  - role: buluma.php
-  - role: buluma.php_fpm
-  - mysql_databases:
-    - collation: utf8_bin
-      encoding: utf8
-      name: owncloud
-    mysql_users:
-    - name: owncloud
-      password: 0wnCl0uD
-      priv: owncloud.*:ALL
-    role: buluma.mysql
+    - role: buluma.bootstrap
+    - role: buluma.core_dependencies
+    - role: buluma.cron
+    - role: buluma.buildtools
+    - role: buluma.epel
+    - role: buluma.python_pip
+    - openssl_items:
+        - common_name: "{{ ansible_fqdn }}"
+          name: apache-httpd
+      role: buluma.openssl
+    - role: buluma.selinux
+    - role: buluma.httpd
+    - role: buluma.redis
+    - remi_enabled_repositories:
+        - php73
+      role: buluma.remi
+      when:
+        - ansible_distribution != "Fedora"
+    - role: buluma.php
+    - role: buluma.php_fpm
+    - mysql_databases:
+        - collation: utf8_bin
+          encoding: utf8
+          name: owncloud
+      mysql_users:
+        - name: owncloud
+          password: 0wnCl0uD
+          priv: owncloud.*:ALL
+      role: buluma.mysql

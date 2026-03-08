@@ -4,20 +4,20 @@
   hosts: all
   name: Verify
   tasks:
-  - ansible.builtin.command:
-      cmd: php occ check
-    args:
-      chdir: '{{ owncloud_destination }}/owncloud'
-    become: true
-    become_user: '{{ owncloud_httpd_owner }}'
-    changed_when: false
-    name: Run occ check
-  - ansible.builtin.uri:
-      url: http://{{ ansible_default_ipv4.address |
-        default(ansible_all_ipv4_addresses[0]) }}/owncloud/status.php
-    name: Get status.php
-    register: owncloud_get_status_php
-    retries: 30
-    until:
-    - owncloud_get_status_php is succeeded
+    - ansible.builtin.command:
+        cmd: php occ check
+      args:
+        chdir: "{{ owncloud_destination }}/owncloud"
+      become: true
+      become_user: "{{ owncloud_httpd_owner }}"
+      changed_when: false
+      name: Run occ check
+    - ansible.builtin.uri:
+        url: http://{{ ansible_default_ipv4.address |
+          default(ansible_all_ipv4_addresses[0]) }}/owncloud/status.php
+      name: Get status.php
+      register: owncloud_get_status_php
+      retries: 30
+      until:
+        - owncloud_get_status_php is succeeded
   vars_files: ../../vars/main.yml
