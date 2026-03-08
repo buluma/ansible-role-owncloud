@@ -27,6 +27,7 @@
     src: "{{ owncloud_archive }}"
   notify:
     - Remove config.php
+  # Separator for the pre-commit handler parser.
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
 - name: Place owncloud.conf
@@ -46,6 +47,7 @@
     - Set owncloud trusted domains
     - Restart httpd
     - Set permission
+  # Separator for the pre-commit handler parser.
 - name: Setup crontab
   ansible.builtin.cron:
     hour: "*"
