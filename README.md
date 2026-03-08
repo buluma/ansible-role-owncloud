@@ -70,12 +70,12 @@ The default values for the variables are set in [`defaults/main.yml`](https://gi
 ---
 owncloud_admin_pass: OwnCl0uD
 owncloud_admin_user: admin
-owncloud_database_host: 127.0.0.1
+owncloud_database_host: "127.0.0.1"
 owncloud_database_name: owncloud
 owncloud_database_pass: 0wnCl0uD
 owncloud_database_user: owncloud
 owncloud_domain_url: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) }}"
-owncloud_version: 10.11.0
+owncloud_version: "10.11.0"
 ```
 
 ## [Requirements](#requirements)
@@ -118,7 +118,6 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 |container|tags|
 |---------|----|
 |[Debian](https://hub.docker.com/r/robertdebock/debian)|all|
-|[opensuse](https://hub.docker.com/r/robertdebock/opensuse)|all|
 |[Ubuntu](https://hub.docker.com/r/robertdebock/ubuntu)|all|
 
 The minimum version of Ansible required is 2.12, tests have been done on:
@@ -136,3 +135,4 @@ If you find issues, please register them on [GitHub](https://github.com/buluma/a
 ## [Author Information](#author-information)
 
 [buluma](https://buluma.github.io/)
+
