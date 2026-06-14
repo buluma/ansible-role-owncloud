@@ -14,8 +14,8 @@
     state: true
   loop: "{{ owncloud_sebooleans }}"
   when:
-    - ansible_selinux.status is defined
-    - ansible_selinux.status == "enabled"
+    - ansible_facts.selinux.status is defined
+    - ansible_facts.selinux.status == "enabled"
 - name: Install owncloud
   ansible.builtin.unarchive:
     creates: "{{ owncloud_destination }}/owncloud"

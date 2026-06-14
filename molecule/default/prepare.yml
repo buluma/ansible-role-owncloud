@@ -11,7 +11,7 @@
     - role: buluma.epel
     - role: buluma.python_pip
     - openssl_items:
-        - common_name: "{{ ansible_fqdn }}"
+        - common_name: "{{ ansible_facts.fqdn }}"
           name: apache-httpd
       role: buluma.openssl
     - role: buluma.selinux
@@ -21,7 +21,7 @@
         - php73
       role: buluma.remi
       when:
-        - ansible_distribution != "Fedora"
+        - ansible_facts.distribution != "Fedora"
     - role: buluma.php
     - role: buluma.php_fpm
     - mysql_databases:
