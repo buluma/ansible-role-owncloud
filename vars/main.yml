@@ -106,11 +106,11 @@ owncloud_command:
   php occ maintenance:install --database "mysql" --database-name "{{ owncloud_database_name }}" --database-user "{{ owncloud_database_user }}"
   --database-pass "{{ owncloud_database_pass }}" --database-host "{{ owncloud_database_host }}" --admin-user "{{ owncloud_admin_user }}" --admin-pass "{{
   owncloud_admin_pass }}"
-owncloud_config_directory: "{{ _owncloud_config_directory[ansible_facts.os_family] | default(_owncloud_config_directory['default']) }}"
-owncloud_destination: "{{ _owncloud_destination[ansible_facts.distribution] | default(_owncloud_destination['default']) }}"
-owncloud_httpd_group: "{{ _owncloud_httpd_group[ansible_facts.os_family] | default(_owncloud_httpd_group['default']) }}"
-owncloud_httpd_owner: "{{ _owncloud_httpd_owner[ansible_facts.os_family] | default(_owncloud_httpd_owner['default']) }}"
-owncloud_httpd_service: "{{ _owncloud_httpd_service[ansible_facts.os_family] | default(_owncloud_httpd_service['default']) }}"
+owncloud_config_directory: "{{ _owncloud_config_directory[ansible_facts['os_family']] | default(_owncloud_config_directory['default']) }}"
+owncloud_destination: "{{ _owncloud_destination[ansible_facts['distribution']] | default(_owncloud_destination['default']) }}"
+owncloud_httpd_group: "{{ _owncloud_httpd_group[ansible_facts['os_family']] | default(_owncloud_httpd_group['default']) }}"
+owncloud_httpd_owner: "{{ _owncloud_httpd_owner[ansible_facts['os_family']] | default(_owncloud_httpd_owner['default']) }}"
+owncloud_httpd_service: "{{ _owncloud_httpd_service[ansible_facts['os_family']] | default(_owncloud_httpd_service['default']) }}"
 owncloud_permissions:
   - group: root
     mode: "0644"
@@ -125,7 +125,7 @@ owncloud_permissions:
   - group: "{{ owncloud_httpd_group }}"
     mode: "0770"
     name: "{{ owncloud_destination }}/owncloud/config"
-owncloud_requirements: "{{ _owncloud_requirements[ansible_facts.os_family] | default(_owncloud_requirements['default']) }}"
+owncloud_requirements: "{{ _owncloud_requirements[ansible_facts['os_family']] | default(_owncloud_requirements['default']) }}"
 owncloud_sebooleans:
   - httpd_tmp_exec
   - httpd_unified
