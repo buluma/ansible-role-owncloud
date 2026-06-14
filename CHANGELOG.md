@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/buluma/ansible-role-owncloud/tree/HEAD)
+## [v26.6.0](https://github.com/buluma/ansible-role-owncloud/tree/v26.6.0) (2026-06-14)
 
-[Full Changelog](https://github.com/buluma/ansible-role-owncloud/compare/v1.0.8...HEAD)
+[Full Changelog](https://github.com/buluma/ansible-role-owncloud/compare/v1.0.8...v26.6.0)
 
 **Closed issues:**
 
@@ -11,6 +11,11 @@
 - rebuild action [\#14](https://github.com/buluma/ansible-role-owncloud/issues/14)
 - Update buluma/todo-to-issue-action@v1.0.1 @buluma [\#13](https://github.com/buluma/ansible-role-owncloud/issues/13)
 - Update action [\#12](https://github.com/buluma/ansible-role-owncloud/issues/12)
+
+**Merged pull requests:**
+
+- Bump ansible/ansible-lint from 26.1.1 to 26.2.0 [\#19](https://github.com/buluma/ansible-role-owncloud/pull/19) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump actions/checkout from 4 to 6 [\#18](https://github.com/buluma/ansible-role-owncloud/pull/18) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [v1.0.8](https://github.com/buluma/ansible-role-owncloud/tree/v1.0.8) (2022-09-11)
 
