@@ -1,9 +1,8 @@
 ---
-- become: false
-  gather_facts: true
 - name: Verify
   hosts: all
-  name: Verify
+  become: false
+  gather_facts: true
   tasks:
     - ansible.builtin.command:
         cmd: php occ check
