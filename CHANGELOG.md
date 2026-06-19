@@ -1,5 +1,9 @@
 # Changelog
 
+## [v26.6.1](https://github.com/buluma/ansible-role-owncloud/tree/v26.6.1) (2026-06-15)
+
+[Full Changelog](https://github.com/buluma/ansible-role-owncloud/compare/v26.6.0...v26.6.1)
+
 ## [v26.6.0](https://github.com/buluma/ansible-role-owncloud/tree/v26.6.0) (2026-06-14)
 
 [Full Changelog](https://github.com/buluma/ansible-role-owncloud/compare/v1.0.8...v26.6.0)
