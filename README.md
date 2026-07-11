@@ -12,10 +12,10 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 
 ```yaml
 ---
-- become: true
-  gather_facts: true
+- name: Converge
   hosts: all
-  name: Converge
+  become: true
+  gather_facts: true
   roles:
     - role: buluma.owncloud
 ```
@@ -24,10 +24,18 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
 
 ```yaml
 ---
-- become: true
-  gather_facts: false
+- name: Prepare
   hosts: all
-  name: Prepare
+  become: true
+  gather_facts: false
+
+  pre_tasks:
+    - name: Install sudo if missing
+      ansible.builtin.raw: "{{ ansible_pkg_mgr | default('dnf') }} install -y sudo}"
+      become: false
+      changed_when: false
+      failed_when: false
+
   roles:
     - role: buluma.bootstrap
     - role: buluma.core_dependencies
@@ -35,29 +43,11 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
     - role: buluma.buildtools
     - role: buluma.epel
     - role: buluma.python_pip
-    - openssl_items:
-        - common_name: "{{ ansible_fqdn }}"
-          name: apache-httpd
-      role: buluma.openssl
     - role: buluma.selinux
     - role: buluma.httpd
     - role: buluma.redis
-    - remi_enabled_repositories:
-        - php73
-      role: buluma.remi
-      when:
-        - ansible_distribution != "Fedora"
     - role: buluma.php
     - role: buluma.php_fpm
-    - mysql_databases:
-        - collation: utf8_bin
-          encoding: utf8
-          name: owncloud
-      mysql_users:
-        - name: owncloud
-          password: 0wnCl0uD
-          priv: owncloud.*:ALL
-      role: buluma.mysql
 ```
 
 Also see a [full explanation and example](https://buluma.github.io/how-to-use-these-roles.html) on how to use these roles.
@@ -74,7 +64,7 @@ owncloud_database_host: "127.0.0.1"
 owncloud_database_name: owncloud
 owncloud_database_pass: 0wnCl0uD
 owncloud_database_user: owncloud
-owncloud_domain_url: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) }}"
+owncloud_domain_url: "{{ ansible_facts['default_ipv4'].address | default(ansible_facts['all_ipv4_addresses'][0]) }}"
 owncloud_version: "10.11.0"
 ```
 
@@ -113,12 +103,14 @@ Here is an overview of related roles:
 
 ## [Compatibility](#compatibility)
 
-This role has been tested on these [container images](https://hub.docker.com/u/robertdebock):
+This role has been tested on these [container images](https://hub.docker.com/u/buluma):
 
 |container|tags|
 |---------|----|
-|[Debian](https://hub.docker.com/r/robertdebock/debian)|all|
-|[Ubuntu](https://hub.docker.com/r/robertdebock/ubuntu)|all|
+|[EL](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
+|[Debian](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
+|[Fedora](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
+|[Ubuntu](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
 
 The minimum version of Ansible required is 2.12, tests have been done on:
 
@@ -136,6 +128,3 @@ If you find issues, please register them on [GitHub](https://github.com/buluma/a
 
 [buluma](https://buluma.github.io/)
 
-### Get Help
-- Report issues: https://github.com/buluma/ansible-role-owncloud/issues/new
-- See docs: https://docs.ansible.com/collection/gallery/ansible-role-owncloud
