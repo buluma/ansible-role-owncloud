@@ -3,6 +3,14 @@
   hosts: all
   become: true
   gather_facts: false
+
+  pre_tasks:
+    - name: Install sudo if missing
+      ansible.builtin.raw: "{{ ansible_pkg_mgr | default('dnf') }} install -y sudo}"
+      become: false
+      changed_when: false
+      failed_when: false
+
   roles:
     - role: buluma.bootstrap
     - role: buluma.core_dependencies
@@ -10,26 +18,8 @@
     - role: buluma.buildtools
     - role: buluma.epel
     - role: buluma.python_pip
-    - openssl_items:
-        - common_name: "{{ ansible_facts['fqdn'] }}"
-          name: apache-httpd
-      role: buluma.openssl
     - role: buluma.selinux
     - role: buluma.httpd
     - role: buluma.redis
-    - remi_enabled_repositories:
-        - php73
-      role: buluma.remi
-      when:
-        - ansible_facts['distribution'] != "Fedora"
     - role: buluma.php
     - role: buluma.php_fpm
-    - mysql_databases:
-        - collation: utf8_bin
-          encoding: utf8
-          name: owncloud
-      mysql_users:
-        - name: owncloud
-          password: 0wnCl0uD
-          priv: owncloud.*:ALL
-      role: buluma.mysql
