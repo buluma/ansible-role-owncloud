@@ -102,8 +102,7 @@ _owncloud_requirements:
     - php-xml
     - php-zip
 owncloud_archive: "https://download.owncloud.com/server/owncloud-{{ owncloud_version }}.zip"
-owncloud_command:
-  php occ maintenance:install --database "mysql" --database-name "{{ owncloud_database_name }}" --database-user "{{ owncloud_database_user }}"
+owncloud_command: php occ maintenance:install --database "mysql" --database-name "{{ owncloud_database_name }}" --database-user "{{ owncloud_database_user }}"
   --database-pass "{{ owncloud_database_pass }}" --database-host "{{ owncloud_database_host }}" --admin-user "{{ owncloud_admin_user }}" --admin-pass "{{
   owncloud_admin_pass }}"
 owncloud_config_directory: "{{ _owncloud_config_directory[ansible_facts['os_family']] | default(_owncloud_config_directory['default']) }}"
