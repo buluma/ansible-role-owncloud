@@ -42,7 +42,7 @@
     creates: "{{ owncloud_destination }}/owncloud/config/config.php"
   become: true
   become_user: "{{ owncloud_httpd_owner }}"
-  no_log: true
+  no_log: false
   notify:
     - Set owncloud trusted domains
     - Restart httpd
