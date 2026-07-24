@@ -45,3 +45,17 @@
     - role: buluma.redis
     - role: buluma.php
     - role: buluma.php_fpm
+    # buluma.mysql was already declared in requirements.yml but never
+    # actually invoked anywhere, so no database existed for "occ
+    # maintenance:install" to connect to. Provisioned with the same
+    # name/user/pass as owncloud's own defaults (owncloud_database_*).
+    - role: buluma.mysql
+      mysql_databases:
+        - name: owncloud
+          encoding: utf8
+          collation: utf8_bin
+      mysql_users:
+        - name: owncloud
+          password: 0wnCl0uD
+          priv: "owncloud.*:ALL"
+          update_password: on_create
