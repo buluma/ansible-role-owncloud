@@ -42,32 +42,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      # Only debian11 kept: OwnCloud 'classic' (the PHP-based server this
+      # role installs) hard-rejects PHP 8.0+ in its own bootstrap code
+      # (lib/base.php, confirmed in the latest stable release v10.16.3) -
+      # a permanent vendor incompatibility, not a version-pinning bug.
+      # debian11 is the only platform here still shipping PHP 7.4; every
+      # other platform ships PHP 8.1+.
       matrix:
         distro:
           - image: "docker-molecule-images"
-            tag: "rockylinux10"
-          - image: "docker-molecule-images"
-            tag: "almalinux10"
-          - image: "docker-molecule-images"
-            tag: "rockylinux9"
-          - image: "docker-molecule-images"
-            tag: "almalinux9"
-          - image: "docker-molecule-images"
-            tag: "debian13"
-          - image: "docker-molecule-images"
-            tag: "debian12"
-          - image: "docker-molecule-images"
             tag: "debian11"
-          - image: "docker-molecule-images"
-            tag: "fedora44"
-          - image: "docker-molecule-images"
-            tag: "fedora43"
-          - image: "docker-molecule-images"
-            tag: "ubuntu2604"
-          - image: "docker-molecule-images"
-            tag: "ubuntu2404"
-          - image: "docker-molecule-images"
-            tag: "ubuntu2204"
     steps:
       - name: checkout
         uses: actions/checkout@v7
