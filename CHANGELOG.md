@@ -6,6 +6,7 @@
 
 **Merged pull requests:**
 
+- feat!: migrate role from ownCloud classic to oCIS \(Infinite Scale\) [\#27](https://github.com/buluma/ansible-role-owncloud/pull/27) ([buluma](https://github.com/buluma))
 - Bump ansible/ansible-lint from 26.6.0 to 26.8.0 [\#26](https://github.com/buluma/ansible-role-owncloud/pull/26) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump release-drafter/release-drafter from 7 to 7.6.0 [\#25](https://github.com/buluma/ansible-role-owncloud/pull/25) ([dependabot[bot]](https://github.com/apps/dependabot))
 
