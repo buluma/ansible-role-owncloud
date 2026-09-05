@@ -1,130 +1,22 @@
 ---
-_owncloud_config_directory:
-  Alpine: /etc/apache2/conf.d
-  Debian: /etc/apache2/conf-enabled
-  Suse: /etc/apache2/conf.d
-  default: /etc/httpd/conf.d
-_owncloud_destination:
-  Alpine: /var/www
-  default: /var/www/html
-  openSUSE Leap: /srv/www/htdocs
-_owncloud_httpd_group:
-  Debian: www-data
-  Suse: www
-  default: apache
-_owncloud_httpd_owner:
-  Debian: www-data
-  Suse: wwwrun
-  default: apache
-_owncloud_httpd_service:
-  Alpine: apache2
-  Debian: apache2
-  RedHat: httpd
-  Suse: apache2
-  default: httpd
-_owncloud_requirements:
-  Alpine:
-    - php7-apcu
-    - php7-ctype
-    - php7-curl
-    - php7-dom
-    - php7-fpm
-    - php7-gd
-    - php7-iconv
-    - php7-intl
-    - php7-json
-    - php7-ldap
-    - php7-mbstring
-    - php7-mysqlnd
-    - php7-mysqli
-    - php7-pdo
-    - php7-posix
-    - php7-simplexml
-    - php7-xmlreader
-    - php7-xmlwriter
-    - php7-xml
-    - php7-zip
-  Debian:
-    - php-apcu
-    - php-common
-    - php-curl
-    - php-fpm
-    - php-gd
-    - php-intl
-    - php-ldap
-    - php-mbstring
-    - php-mysql
-    - php-xml
-    - php-zip
-  RedHat:
-    - php-curl
-    - php-fpm
-    - php-gd
-    - php-intl
-    - php-json
-    - php-ldap
-    - php-mbstring
-    - php-mysqlnd
-    - php-pecl-apcu
-    - php-process
-    - php-xml
-    - php-zip
-  Suse:
-    - php-posix
-    - php7-ctype
-    - php7-curl
-    - php7-dom
-    - php7-fpm
-    - php7-gd
-    - php7-iconv
-    - php7-intl
-    - php7-json
-    - php7-ldap
-    - php7-mbstring
-    - php7-mysql
-    - php7-pdo
-    - php7-xmlreader
-    - php7-xmlwriter
-    - php7-zip
-    - php7-zlib
-  default:
-    - php-curl
-    - php-fpm
-    - php-gd
-    - php-intl
-    - php-json
-    - php-ldap
-    - php-mbstring
-    - php-mysqlnd
-    - php-pecl-apcu
-    - php-pecl-redis
-    - php-process
-    - php-xml
-    - php-zip
-owncloud_archive: "https://download.owncloud.com/server/owncloud-{{ owncloud_version }}.zip"
-owncloud_command: php occ maintenance:install --database "mysql" --database-name "{{ owncloud_database_name }}" --database-user "{{ owncloud_database_user }}"
-  --database-pass "{{ owncloud_database_pass }}" --database-host "{{ owncloud_database_host }}" --admin-user "{{ owncloud_admin_user }}" --admin-pass "{{
-  owncloud_admin_pass }}"
-owncloud_config_directory: "{{ _owncloud_config_directory[ansible_facts['os_family']] | default(_owncloud_config_directory['default']) }}"
-owncloud_destination: "{{ _owncloud_destination[ansible_facts['distribution']] | default(_owncloud_destination['default']) }}"
-owncloud_httpd_group: "{{ _owncloud_httpd_group[ansible_facts['os_family']] | default(_owncloud_httpd_group['default']) }}"
-owncloud_httpd_owner: "{{ _owncloud_httpd_owner[ansible_facts['os_family']] | default(_owncloud_httpd_owner['default']) }}"
-owncloud_httpd_service: "{{ _owncloud_httpd_service[ansible_facts['os_family']] | default(_owncloud_httpd_service['default']) }}"
-owncloud_permissions:
-  - group: root
-    mode: "0644"
-    name: "{{ owncloud_destination }}/owncloud/.htaccess"
-    owner: root
-  - group: "{{ owncloud_httpd_group }}"
-    mode: "0770"
-    name: "{{ owncloud_destination }}/owncloud/data"
-  - group: "{{ owncloud_httpd_group }}"
-    mode: "0664"
-    name: "{{ owncloud_destination }}/owncloud/config/config.php"
-  - group: "{{ owncloud_httpd_group }}"
-    mode: "0770"
-    name: "{{ owncloud_destination }}/owncloud/config"
-owncloud_requirements: "{{ _owncloud_requirements[ansible_facts['os_family']] | default(_owncloud_requirements['default']) }}"
-owncloud_sebooleans:
-  - httpd_tmp_exec
-  - httpd_unified
+# vars file for owncloud (oCIS)
+
+_ocis_architecture_map:
+  aarch64: arm64
+  armv7l: arm
+  i386: "386"
+  i686: "386"
+  x86_64: amd64
+
+ocis_architecture: "{{ _ocis_architecture_map[ansible_facts['architecture']] }}"
+
+_ocis_download:
+  "8.2.0":
+    amd64:
+      url: "https://github.com/owncloud/ocis/releases/download/v8.2.0/ocis-8.2.0-linux-amd64"
+      checksum: "sha256:12a0a4f6b3c6c926bfa75a9d58aee3913ff787c6d107ccc04d3aa18b4c0b5bd2"
+    arm64:
+      url: "https://github.com/owncloud/ocis/releases/download/v8.2.0/ocis-8.2.0-linux-arm64"
+      checksum: "sha256:2e14092a159270b56252e1a524c16aa36f7d2c4ba26e94d75445c06539be68ae"
+
+ocis_download: "{{ _ocis_download[ocis_version][ocis_architecture] }}"
