@@ -18,5 +18,11 @@ _ocis_download:
     arm64:
       url: "https://github.com/owncloud/ocis/releases/download/v8.2.0/ocis-8.2.0-linux-arm64"
       checksum: "sha256:2e14092a159270b56252e1a524c16aa36f7d2c4ba26e94d75445c06539be68ae"
+    arm:
+      url: "https://github.com/owncloud/ocis/releases/download/v8.2.0/ocis-8.2.0-linux-arm"
+      checksum: "sha256:ad82a3182bf56d1cdffc06412503ead1dbf8853e82716b6ed93ad420d2cff2f7"
+    "386":
+      url: "https://github.com/owncloud/ocis/releases/download/v8.2.0/ocis-8.2.0-linux-386"
+      checksum: "sha256:06f5e996e13fcbc5af39ebb6e7feb8177031d67ba8572e0e8ab94f2f54704c69"
 
 ocis_download: "{{ _ocis_download[ocis_version][ocis_architecture] }}"

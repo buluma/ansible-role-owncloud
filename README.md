@@ -8,6 +8,15 @@ pinned this role to end-of-life Debian 11 (the last release still shipping PHP
 7.4). oCIS is ownCloud's PHP8-compatible successor: a single statically-linked
 Go binary with no PHP, Apache, MySQL, or Redis dependency.
 
+**This role does not migrate data from an existing classic ownCloud
+instance**, and the old `owncloud_*` variables are gone - this installs a
+separate, empty oCIS instance from scratch. If you have production data on
+classic ownCloud, follow ownCloud's own [Migrating to ownCloud Infinite
+Scale](https://doc.owncloud.com/server/latest/admin_manual/maintenance/migrating_to_ocis.html)
+procedure against a clean oCIS target (this role can provide that target):
+it migrates users, groups, files, and shares, in that order, while the
+classic instance keeps running.
+
 |GitHub|Issues|Pull Requests|Version|Downloads|
 |------|------|-------------|-------|---------|
 |[![github](https://github.com/buluma/ansible-role-owncloud/actions/workflows/molecule.yml/badge.svg)](https://github.com/buluma/ansible-role-owncloud/actions/workflows/molecule.yml)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-owncloud.svg)](https://github.com/buluma/ansible-role-owncloud/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-owncloud.svg)](https://github.com/buluma/ansible-role-owncloud/pulls/)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-owncloud.svg)](https://github.com/buluma/ansible-role-owncloud/releases/)|[![Ansible Role](https://img.shields.io/ansible/role/d/buluma/owncloud)](https://galaxy.ansible.com/ui/standalone/roles/buluma/owncloud/documentation)|

@@ -4,6 +4,23 @@
   delegate_to: localhost
   run_once: true
 
+# Not folded into assert.yml: that file is imported with delegate_to:
+# localhost, but architecture is a per-host fact - checking it there would
+# validate the controller's architecture, not this host's.
+- name: Assert | Test if ocis_version is a supported release
+  ansible.builtin.assert:
+    quiet: true
+    that:
+      - ocis_version in _ocis_download
+    fail_msg: "ocis_version '{{ ocis_version }}' has no matching entry in vars/main.yml's _ocis_download."
+
+- name: Assert | Test if this host's architecture is supported
+  ansible.builtin.assert:
+    quiet: true
+    that:
+      - ansible_facts['architecture'] in _ocis_architecture_map
+    fail_msg: "No oCIS build is mapped for architecture '{{ ansible_facts['architecture'] }}' in vars/main.yml's _ocis_architecture_map."
+
 - name: Groupadd
   ansible.builtin.group:
     name: "{{ ocis_group }}"
@@ -39,6 +56,8 @@
     owner: root
     group: root
     mode: "0755"
+  notify:
+    - Ocis | systemctl restart ocis
 
 - name: Place ocis.env
   ansible.builtin.template:
@@ -47,6 +66,8 @@
     owner: "{{ ocis_owner }}"
     group: "{{ ocis_group }}"
     mode: "0640"
+  notify:
+    - Ocis | systemctl restart ocis
 
 - name: Initialize oCIS configuration
   # Runs as root, same as ownCloud's own documented systemd deployment
