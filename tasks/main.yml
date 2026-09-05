@@ -50,15 +50,20 @@
 
 - name: Initialize oCIS configuration
   # Runs as root, same as ownCloud's own documented systemd deployment
-  # (docs/ocis/deployment/systemd.md in owncloud/ocis) - 'ocis init' itself
-  # has no blocking I/O (no network calls, no prompts, just local random
-  # password generation and a config file write), so there's nothing here
-  # that should need become_user. async/poll is a hard timeout: if this
-  # ever hangs again it fails fast instead of burning the whole job.
+  # (docs/ocis/deployment/systemd.md in owncloud/ocis).
+  #
+  # `ocis init`'s --insecure flag defaults to "ask" (see
+  # ocis/pkg/command/init.go upstream): left unset, it blocks forever
+  # reading a yes/no prompt from stdin (its retry loop doesn't even
+  # break on EOF). Setting OCIS_INSECURE here - the same env var the
+  # flag itself reads - skips the prompt entirely. async/poll is a
+  # hard timeout on top: if this ever hangs again it fails fast
+  # instead of burning the whole job.
   ansible.builtin.command:
     cmd: "{{ ocis_binary_path }} init --config-path {{ ocis_config_dir }}"
     creates: "{{ ocis_config_dir }}/ocis.yaml"
   environment:
+    OCIS_INSECURE: "{{ ocis_insecure | lower }}"
     IDM_ADMIN_PASSWORD: "{{ ocis_admin_pass }}"
   async: 120
   poll: 5
