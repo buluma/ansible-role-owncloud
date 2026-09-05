@@ -2,12 +2,25 @@
 # Pins the CI platform/version matrix for this role. Without this, ansible-generator
 # falls back to default_platforms and silently discards these choices on regenerate.
 #
-# EL, Fedora, and Ubuntu are excluded entirely, and Debian is pinned to 11
-# only: OwnCloud 'classic' (the PHP-based server this role installs) hard-
-# rejects PHP 8.0+ in its own bootstrap code (lib/base.php, confirmed in
-# the latest stable release v10.16.3) - a permanent vendor incompatibility.
-# debian11 is the only platform still shipping PHP 7.4.
+# This role now installs oCIS (ownCloud Infinite Scale) instead of ownCloud
+# 'classic': a statically-linked Go binary with no PHP/Apache/MySQL/Redis
+# dependency (see SHA-177 and defaults/main.yml), so it isn't tied to any
+# particular platform's PHP version anymore. Matrix widened accordingly.
 platforms:
+  - name: EL
+    versions:
+      - "10"
+      - "9"
   - name: Debian
     versions:
-      - "11"
+      - "13"
+      - "12"
+  - name: Fedora
+    versions:
+      # Excludes 45: it ships Python 3.15.0b3, whose dataclasses module
+      # dropped _is_type, breaking ansible-core's AnsiballZ module wrapper.
+      - "44"
+      - "43"
+  - name: Ubuntu
+    versions:
+      - all

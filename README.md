@@ -1,6 +1,21 @@
 # [Ansible role owncloud](#ansible-role-owncloud)
 
-Install and configure owncloud on your system.
+Install and configure ownCloud Infinite Scale (oCIS) on your system.
+
+ownCloud 'classic' (the PHP-based server this role used to install) hard-rejects
+PHP 8.0+ and never will support it - a permanent vendor incompatibility that
+pinned this role to end-of-life Debian 11 (the last release still shipping PHP
+7.4). oCIS is ownCloud's PHP8-compatible successor: a single statically-linked
+Go binary with no PHP, Apache, MySQL, or Redis dependency.
+
+**This role does not migrate data from an existing classic ownCloud
+instance**, and the old `owncloud_*` variables are gone - this installs a
+separate, empty oCIS instance from scratch. If you have production data on
+classic ownCloud, follow ownCloud's own [Migrating to ownCloud Infinite
+Scale](https://doc.owncloud.com/server/latest/admin_manual/maintenance/migrating_to_ocis.html)
+procedure against a clean oCIS target (this role can provide that target):
+it migrates users, groups, files, and shares, in that order, while the
+classic instance keeps running.
 
 |GitHub|Issues|Pull Requests|Version|Downloads|
 |------|------|-------------|-------|---------|
@@ -61,15 +76,6 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
   roles:
     - role: buluma.bootstrap
     - role: buluma.core_dependencies
-    - role: buluma.cron
-    - role: buluma.buildtools
-    - role: buluma.epel
-    - role: buluma.python_pip
-    - role: buluma.selinux
-    - role: buluma.httpd
-    - role: buluma.redis
-    - role: buluma.php
-    - role: buluma.php_fpm
 ```
 
 Also see a [full explanation and example](https://buluma.github.io/how-to-use-these-roles.html) on how to use these roles.
@@ -80,14 +86,38 @@ The default values for the variables are set in [`defaults/main.yml`](https://gi
 
 ```yaml
 ---
-owncloud_admin_pass: OwnCl0uD
-owncloud_admin_user: admin
-owncloud_database_host: "127.0.0.1"
-owncloud_database_name: owncloud
-owncloud_database_pass: 0wnCl0uD
-owncloud_database_user: owncloud
-owncloud_domain_url: "{{ ansible_facts['default_ipv4'].address | default(ansible_facts['all_ipv4_addresses'][0]) }}"
-owncloud_version: "10.11.0"
+# ownCloud 'classic' (the PHP-based server this role used to install) hard-
+# rejects PHP 8.0+ and never will support it - a permanent vendor
+# incompatibility (see meta/preferences.yml history). ownCloud's PHP8-
+# compatible successor is Infinite Scale (oCIS): a single Go binary, no
+# PHP/Apache/MySQL/Redis involved. This role now installs that instead.
+
+# oCIS release to install.
+ocis_version: "8.2.0"
+
+# Owner and group for oCIS.
+ocis_owner: "ocis"
+ocis_group: "ocis"
+
+# Where the oCIS binary, config, and data live.
+ocis_binary_path: "/usr/bin/ocis"
+ocis_config_dir: "/etc/ocis"
+ocis_data_path: "/var/lib/ocis"
+
+# Public URL and bind address (see OCIS_URL / PROXY_HTTP_ADDR).
+ocis_url: "https://{{ ansible_facts['default_ipv4'].address | default(ansible_facts['all_ipv4_addresses'][0]) }}:9200"
+ocis_http_addr: "0.0.0.0:9200"
+
+# This role doesn't manage TLS certificates, so oCIS falls back to its own
+# auto-generated self-signed certificate out of the box - set false only
+# once you've put a real certificate in front of it.
+ocis_insecure: true
+
+ocis_log_level: "error"
+
+# Admin account. oCIS generates a random admin password on init unless
+# IDM_ADMIN_PASSWORD is set - this role always sets it explicitly.
+ocis_admin_pass: OwnCl0uD
 ```
 
 ## [Requirements](#requirements)
@@ -101,19 +131,7 @@ The following roles are used to prepare a system. You can prepare your system in
 | Requirement | GitHub |
 |-------------|--------|
 |[buluma.bootstrap](https://galaxy.ansible.com/buluma/bootstrap)|[![Build Status GitHub](https://github.com/buluma/ansible-role-bootstrap/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-bootstrap/actions)|
-|[buluma.buildtools](https://galaxy.ansible.com/buluma/buildtools)|[![Build Status GitHub](https://github.com/buluma/ansible-role-buildtools/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-buildtools/actions)|
 |[buluma.core_dependencies](https://galaxy.ansible.com/buluma/core_dependencies)|[![Build Status GitHub](https://github.com/buluma/ansible-role-core_dependencies/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-core_dependencies/actions)|
-|[buluma.cron](https://galaxy.ansible.com/buluma/cron)|[![Build Status GitHub](https://github.com/buluma/ansible-role-cron/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-cron/actions)|
-|[buluma.epel](https://galaxy.ansible.com/buluma/epel)|[![Build Status GitHub](https://github.com/buluma/ansible-role-epel/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-epel/actions)|
-|[buluma.httpd](https://galaxy.ansible.com/buluma/httpd)|[![Build Status GitHub](https://github.com/buluma/ansible-role-httpd/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-httpd/actions)|
-|[buluma.mysql](https://galaxy.ansible.com/buluma/mysql)|[![Build Status GitHub](https://github.com/buluma/ansible-role-mysql/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-mysql/actions)|
-|[buluma.openssl](https://galaxy.ansible.com/buluma/openssl)|[![Build Status GitHub](https://github.com/buluma/ansible-role-openssl/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-openssl/actions)|
-|[buluma.php](https://galaxy.ansible.com/buluma/php)|[![Build Status GitHub](https://github.com/buluma/ansible-role-php/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-php/actions)|
-|[buluma.php_fpm](https://galaxy.ansible.com/buluma/php_fpm)|[![Build Status GitHub](https://github.com/buluma/ansible-role-php_fpm/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-php_fpm/actions)|
-|[buluma.python_pip](https://galaxy.ansible.com/buluma/python_pip)|[![Build Status GitHub](https://github.com/buluma/ansible-role-python_pip/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-python_pip/actions)|
-|[buluma.redis](https://galaxy.ansible.com/buluma/redis)|[![Build Status GitHub](https://github.com/buluma/ansible-role-redis/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-redis/actions)|
-|[buluma.remi](https://galaxy.ansible.com/buluma/remi)|[![Build Status GitHub](https://github.com/buluma/ansible-role-remi/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-remi/actions)|
-|[buluma.selinux](https://galaxy.ansible.com/buluma/selinux)|[![Build Status GitHub](https://github.com/buluma/ansible-role-selinux/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-selinux/actions)|
 
 ## [Context](#context)
 
@@ -130,7 +148,7 @@ This role has been tested on these [container images](https://hub.docker.com/u/b
 |container|tags|
 |---------|----|
 |[EL](https://hub.docker.com/r/buluma/docker-molecule-images)|10, 9|
-|[Debian](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
+|[Debian](https://hub.docker.com/r/buluma/docker-molecule-images)|13, 12|
 |[Fedora](https://hub.docker.com/r/buluma/docker-molecule-images)|44, 43|
 |[Ubuntu](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
 

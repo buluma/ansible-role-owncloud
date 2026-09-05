@@ -1,49 +1,25 @@
 ---
-- name: assert | Test if owncloud_version is set correctly
+- name: assert | Test if ocis_version is set correctly
   ansible.builtin.assert:
     quiet: true
     that:
-      - owncloud_version is defined
-      - owncloud_version is string
-- name: assert | Test if owncloud_domain_url is set correctly
+      - ocis_version is defined
+      - ocis_version is string
+- name: assert | Test if ocis_url is set correctly
   ansible.builtin.assert:
     quiet: true
     that:
-      - owncloud_domain_url is defined
-      - owncloud_domain_url is string
-- name: assert | Test if owncloud_database_name is set correctly
+      - ocis_url is defined
+      - ocis_url is string
+- name: assert | Test if ocis_http_addr is set correctly
   ansible.builtin.assert:
     quiet: true
     that:
-      - owncloud_database_name is defined
-      - owncloud_database_name is string
-- name: assert | Test if owncloud_database_user is set correctly
+      - ocis_http_addr is defined
+      - ocis_http_addr is string
+- name: assert | Test if ocis_admin_pass is set correctly
   ansible.builtin.assert:
     quiet: true
     that:
-      - owncloud_database_user is defined
-      - owncloud_database_user is string
-- name: assert | Test if owncloud_database_pass is set correctly
-  ansible.builtin.assert:
-    quiet: true
-    that:
-      - owncloud_database_pass is defined
-      - owncloud_database_pass is string
-- name: assert | Test if owncloud_database_host is set correctly
-  ansible.builtin.assert:
-    quiet: true
-    that:
-      - owncloud_database_host is defined
-      - owncloud_database_host is string
-- name: assert | Test if owncloud_admin_user is set correctly
-  ansible.builtin.assert:
-    quiet: true
-    that:
-      - owncloud_admin_user is defined
-      - owncloud_admin_user is string
-- name: assert | Test if owncloud_admin_pass is set correctly
-  ansible.builtin.assert:
-    quiet: true
-    that:
-      - owncloud_admin_pass is defined
-      - owncloud_admin_pass is string
+      - ocis_admin_pass is defined
+      - ocis_admin_pass is string
