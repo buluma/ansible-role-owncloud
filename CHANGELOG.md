@@ -1,8 +1,12 @@
 # Changelog
 
-## [Unreleased](https://github.com/buluma/ansible-role-owncloud/tree/HEAD)
+## [v26.9.0](https://github.com/buluma/ansible-role-owncloud/tree/v26.9.0) (2026-09-05)
 
-[Full Changelog](https://github.com/buluma/ansible-role-owncloud/compare/v26.6.2...HEAD)
+[Full Changelog](https://github.com/buluma/ansible-role-owncloud/compare/v26.7.0...v26.9.0)
+
+## [v26.7.0](https://github.com/buluma/ansible-role-owncloud/tree/v26.7.0) (2026-09-05)
+
+[Full Changelog](https://github.com/buluma/ansible-role-owncloud/compare/v26.6.2...v26.7.0)
 
 **Merged pull requests:**
 
