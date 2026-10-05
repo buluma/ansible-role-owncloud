@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased](https://github.com/buluma/ansible-role-owncloud/tree/HEAD)
+
+[Full Changelog](https://github.com/buluma/ansible-role-owncloud/compare/v26.9.0...HEAD)
+
+**Merged pull requests:**
+
+- Enable native Dependabot auto-merge with required CI [\#29](https://github.com/buluma/ansible-role-owncloud/pull/29) ([buluma](https://github.com/buluma))
+
 ## [v26.9.0](https://github.com/buluma/ansible-role-owncloud/tree/v26.9.0) (2026-09-05)
 
 [Full Changelog](https://github.com/buluma/ansible-role-owncloud/compare/v26.7.0...v26.9.0)
