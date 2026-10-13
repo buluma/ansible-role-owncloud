@@ -6,6 +6,7 @@
 
 **Merged pull requests:**
 
+- chore\(deps\): bump ansible/ansible-lint from 26.9.0 to 26.10.0 [\#31](https://github.com/buluma/ansible-role-owncloud/pull/31) ([dependabot[bot]](https://github.com/apps/dependabot))
 - chore\(deps\): bump release-drafter/release-drafter from 7.7.0 to 7.9.0 [\#30](https://github.com/buluma/ansible-role-owncloud/pull/30) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [v26.10.9](https://github.com/buluma/ansible-role-owncloud/tree/v26.10.9) (2026-10-04)
