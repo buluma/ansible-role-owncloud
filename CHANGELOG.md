@@ -2,7 +2,15 @@
 
 ## [Unreleased](https://github.com/buluma/ansible-role-owncloud/tree/HEAD)
 
-[Full Changelog](https://github.com/buluma/ansible-role-owncloud/compare/v26.9.0...HEAD)
+[Full Changelog](https://github.com/buluma/ansible-role-owncloud/compare/v26.10.9...HEAD)
+
+**Merged pull requests:**
+
+- chore\(deps\): bump release-drafter/release-drafter from 7.7.0 to 7.9.0 [\#30](https://github.com/buluma/ansible-role-owncloud/pull/30) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v26.10.9](https://github.com/buluma/ansible-role-owncloud/tree/v26.10.9) (2026-10-04)
+
+[Full Changelog](https://github.com/buluma/ansible-role-owncloud/compare/v26.9.0...v26.10.9)
 
 **Merged pull requests:**
 
