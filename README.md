@@ -93,7 +93,7 @@ The default values for the variables are set in [`defaults/main.yml`](https://gi
 # PHP/Apache/MySQL/Redis involved. This role now installs that instead.
 
 # oCIS release to install.
-ocis_version: "8.2.0"
+ocis_version: "8.2.2"
 
 # Owner and group for oCIS.
 ocis_owner: "ocis"
