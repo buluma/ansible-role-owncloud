@@ -1,21 +1,6 @@
 # [Ansible role owncloud](#ansible-role-owncloud)
 
-Install and configure ownCloud Infinite Scale (oCIS) on your system.
-
-ownCloud 'classic' (the PHP-based server this role used to install) hard-rejects
-PHP 8.0+ and never will support it - a permanent vendor incompatibility that
-pinned this role to end-of-life Debian 11 (the last release still shipping PHP
-7.4). oCIS is ownCloud's PHP8-compatible successor: a single statically-linked
-Go binary with no PHP, Apache, MySQL, or Redis dependency.
-
-**This role does not migrate data from an existing classic ownCloud
-instance**, and the old `owncloud_*` variables are gone - this installs a
-separate, empty oCIS instance from scratch. If you have production data on
-classic ownCloud, follow ownCloud's own [Migrating to ownCloud Infinite
-Scale](https://doc.owncloud.com/server/latest/admin_manual/maintenance/migrating_to_ocis.html)
-procedure against a clean oCIS target (this role can provide that target):
-it migrates users, groups, files, and shares, in that order, while the
-classic instance keeps running.
+Install and configure owncloud on your system.
 
 |GitHub|Issues|Pull Requests|Version|Downloads|
 |------|------|-------------|-------|---------|
